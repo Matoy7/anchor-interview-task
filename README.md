@@ -66,76 +66,68 @@ The application will start on `http://localhost:8080` by default.
 
 ### 1. Create a new spreadsheet
 
-**Endpoint:** `POST /api/spreadsheets`
+**Endpoint:** `POST http://localhost:8080/sheet/`
 
 **Request body:**
 
 ```json
 {
-  "name": "Monthly Budget",
-  "rows": 10,
-  "columns": 5
+    "columns": [
+        {
+            "name": "A",
+            "type": "boolean"
+        },
+        {
+            "name": "B",
+            "type": "int"
+        },
+        {
+            "name": "C",
+            "type": "double"
+        },
+        {
+            "name": "D",
+            "type": "string"
+        }
+    ]
 }
 ```
 
 **Response:**
-
 ```json
 {
-  "id": 1,
-  "name": "Monthly Budget",
-  "rows": 10,
-  "columns": 5,
-  "createdAt": "2025-01-01T00:00:00"
+    "key": "id",
+    "value": 2
 }
 ```
-
 ### 2. Get spreadsheet by ID
 
-**Endpoint:** `GET /api/spreadsheets/{id}`
+**Endpoint:** `GET http://localhost:8080/sheet/{sheetId}`
 
 **Response:**
 
 ```json
 {
-  "id": 1,
-  "name": "Monthly Budget",
-  "rows": 10,
-  "columns": 5,
-  "data": [
-    ["Date", "Amount", "Category", "Description", "Status"],
-    ["01/01/2025", "$500", "Rent", "January Rent", "Paid"],
-    ["01/02/2025", "$200", "Utilities", "Electric Bill", "Pending"]
-  ]
+    "key": "sheet id:  1",
+    "value": [
+        {
+            "rowNumber": 12,
+            "content": "Some content here",
+            "colName": "B"
+        }
+    ]
 }
 ```
 
-### 3. Add row to spreadsheet
+### 3. Add Cell to spreadsheet
 
-**Endpoint:** `POST /api/spreadsheets/{id}/rows`
+**Endpoint:** `POST http://localhost:8080/sheet/{sheetId}/col/{columnName}/row/{rowId}`
 
 **Request body:**
 
 ```json
 {
-  "values": ["01/03/2025", "$300", "Food", "Grocery Shopping", "Paid"]
-}
-```
-
-**Response:**
-
-```json
-{
-  "id": 1,
-  "name": "Monthly Budget",
-  "rows": 11,
-  "columns": 5,
-  "data": [
-    ["Date", "Amount", "Category", "Description", "Status"],
-    ["01/01/2025", "$500", "Rent", "January Rent", "Paid"],
-    ["01/02/2025", "$200", "Utilities", "Electric Bill", "Pending"],
-    ["01/03/2025", "$300", "Food", "Grocery Shopping", "Paid"]
-  ]
+    "content": "Some content here"
 }
 ```
 
