@@ -10,7 +10,7 @@ This project provides an API for managing spreadsheets, built using **Java** and
 - Get spreadsheet data by ID
 - Lookup option for a cell to referenace another cell's value.
 - support api concurrency
-- support error handling such as enforce cycle refernce and type verification of columns
+- support error handling (enforce cycle refernce and type verification of columns)
 
 ## Prerequisites
 
