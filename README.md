@@ -1,13 +1,14 @@
  
 # Spreadsheet Manager API
 
-This project provides an API for managing spreadsheets, built using **Java** and **Spring Boot**. The API allows users to create, update, and retrieve spreadsheet data, as well as handle various spreadsheet operations like adding rows, columns, and editing cell data.
+This project provides an API for managing spreadsheets, built using **Java** and **Spring Boot**. The API allows users to create, update, and retrieve spreadsheet data, as well as handle various spreadsheet operations like adding cell data. It also support Lookup option for a cell to referenace another cell's value.
 
 ## Features
 
 - Create and manage spreadsheets
-- Add, update, and delete rows/columns in a spreadsheet
+- Add and update cells in a spreadsheet
 - Get spreadsheet data by ID
+- Lookup option for a cell to referenace another cell's value.
 
 ## Prerequisites
 
@@ -24,26 +25,14 @@ Follow these steps to get a local copy of the project running:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/spreadsheet-manager-api.git
-cd spreadsheet-manager-api
+git clone https://github.com/Matoy7/anchor-interview-task.git
+cd anchor-interview-task
 ```
 
 ### 2. Set up the environment
 
-Make sure to configure your environment properties. You can create an `application.properties` or `application.yml` file under `src/main/resources/` if not already provided. Typical properties might include:
+Make sure to have the port 8080 free for use since the application is using it. 
 
-```properties
-# Database connection properties (if using a database)
-spring.datasource.url=jdbc:mysql://localhost:3306/spreadsheet_db
-spring.datasource.username=root
-spring.datasource.password=secretpassword
-
-# Spring profile for development
-spring.profiles.active=dev
-
-# Server port (optional)
-server.port=8080
-```
 
 ### 3. Build the project
 
@@ -66,7 +55,7 @@ mvn spring-boot:run
 Or, if you prefer to run the packaged `.jar` file:
 
 ```bash
-java -jar target/spreadsheet-manager-api-1.0.0.jar
+java -jar anchor-interview-task-1.0-SNAPSHOT.jar
 ```
 
 The application will start on `http://localhost:8080` by default.
