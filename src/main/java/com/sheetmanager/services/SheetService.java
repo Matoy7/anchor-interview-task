@@ -7,7 +7,6 @@ import com.sheetmanager.entities.column.Column;
 import com.sheetmanager.entities.schema.ColumnType;
 import com.sheetmanager.entities.schema.Schema;
 import com.sheetmanager.mappers.CellMapper;
-import com.sheetmanager.utils.CellInfo;
 import com.sheetmanager.utils.SheetUtils;
 
 
@@ -141,8 +140,8 @@ public class SheetService {
         return isCircleRefExist(sheetId, cell, new HashSet());
     }
 
-    private boolean isCircleRefExist(int sheetId, Cell cell, Set<CellInfo> visitedCells) {
-        CellInfo cellInfo = new CellInfo(cell.getColName(), cell.getRowNumber());
+    private boolean isCircleRefExist(int sheetId, Cell cell, Set<Cell> visitedCells) {
+        Cell cellInfo = new Cell(sheetId,cell.getColName(), cell.getRowNumber(), null);
         if (visitedCells.contains(cellInfo)) {
             return true;
         }
