@@ -1,5 +1,3 @@
-Here's an example of a `README.md` for a GitHub repository of a Spreadsheet Manager API project written in Java with Spring Boot:
-
 ```markdown
 # Spreadsheet Manager API
 
@@ -10,9 +8,6 @@ This project provides an API for managing spreadsheets, built using **Java** and
 - Create and manage spreadsheets
 - Add, update, and delete rows/columns in a spreadsheet
 - Get spreadsheet data by ID
-- Download spreadsheet in CSV format
-- Error handling and validation for incorrect data
-- API authentication and authorization (if enabled)
 
 ## Prerequisites
 
