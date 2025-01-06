@@ -9,8 +9,8 @@ This project provides an API for managing spreadsheets, built using **Java** and
 - Add and update cells in a spreadsheet
 - Get spreadsheet data by ID
 - Lookup option for a cell to referenace another cell's value.
-- support multithrad use
-- support error hanling such as avoid cycle refernce and enforce type verification of columns
+- support api concurrency
+- support error hanling such as enforce cycle refernce and type verification of columns
 
 ## Prerequisites
 
