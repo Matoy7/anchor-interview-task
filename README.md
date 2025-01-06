@@ -161,24 +161,10 @@ The application will start on `http://localhost:8080` by default.
 }
 ```
 
-### 5. Download spreadsheet as CSV
-
-**Endpoint:** `GET /api/spreadsheets/{id}/download`
-
-**Response:** CSV file containing the spreadsheet data.
-
-## Authentication (Optional)
-
-If authentication is enabled (JWT or basic authentication), include the following headers in the requests:
-
-- **Authorization:** Bearer `your-jwt-token`
-
 ## Technologies Used
 
 - **Java 11**
 - **Spring Boot** (for the web framework)
-- **JPA/Hibernate** (for database interaction)
-- **H2 Database** (for local development; can be replaced with MySQL or PostgreSQL)
 - **Maven** (for project dependency management)
 
 ## Contributing
@@ -199,8 +185,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgements
 
 - Thanks to [Spring Boot](https://spring.io/projects/spring-boot) for the amazing framework.
-- Special thanks to [Apache POI](https://poi.apache.org/) for handling Excel file parsing.
 
 ```
-
-This example provides a comprehensive guide to setting up and using the Spreadsheet Manager API, along with examples of key API endpoints and their responses. It can be tailored further based on the exact functionality and libraries used in your project.
