@@ -1,7 +1,7 @@
  
 # Spreadsheet Manager
 
-This project provides an API for managing spreadsheets, built using **Java** and **Spring Boot**. The API allows users to create, update, and retrieve spreadsheet data. It also supports Lookup option for a cell to referenace another cell's value.
+This project provides an API for managing spreadsheets, built using **Java** and **Spring Boot**. The API allows users to create, update, and retrieve spreadsheet data. It also supports Lookup (a cell value which is a referenace to another cell's value).
 
 ## Features
 
