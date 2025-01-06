@@ -152,6 +152,11 @@ The application will start on `http://localhost:8080` by default.
   "message": "Cell updated successfully"
 }
 ```
+## Test coverage
+
+- the project is covered by:
+    - unit tests (which cover most of the code and run as part of the mvn lifecycle.
+    - intergration tests (sprint mvc library) - tests the controller end point.
 
 ## Technologies Used
 
