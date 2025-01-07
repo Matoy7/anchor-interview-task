@@ -53,7 +53,7 @@ To run the Spring Boot application, use the following command:
 ```bash
 mvn spring-boot:run
 ```
-
+```
 Or, if you prefer to run it via some IDE (Intellij or other)
 ```
 
