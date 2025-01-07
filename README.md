@@ -53,11 +53,8 @@ To run the Spring Boot application, use the following command:
 ```bash
 mvn spring-boot:run
 ```
-
-Or, if you prefer to run the packaged `.jar` file:
-
-```bash
-java -jar anchor-interview-task-1.0-SNAPSHOT.jar
+```
+Or, if you prefer to run it via some IDE (Intellij or other)
 ```
 
 The application will start on `http://localhost:8080` by default.
@@ -111,15 +108,25 @@ The application will start on `http://localhost:8080` by default.
     "key": "sheet id:  1",
     "value": [
         {
+            "rowNumber": 33,
+            "content": 111,
+            "colName": "B"
+        },
+        {
+            "rowNumber": 11,
+            "content": 333,
+            "colName": "B"
+        },
+        {
             "rowNumber": 12,
-            "content": "Some content here",
+            "content": 222,
             "colName": "B"
         }
     ]
 }
 ```
 
-### 3. Add Cell to spreadsheet
+### 3. Add Cell to spreadsheet with plain value
 
 **Endpoint:** `POST http://localhost:8080/sheet/{sheetId}/col/{columnName}/row/{rowId}`
 
@@ -131,27 +138,24 @@ The application will start on `http://localhost:8080` by default.
 }
 ```
 
-### 4. Update cell in spreadsheet
+**Response:**
 
-**Endpoint:** `PUT /api/spreadsheets/{id}/cells`
+200 OK
+### 4. Add Cell to spreadsheet with lookup value
+
+**Endpoint:** `POST http://localhost:8080/sheet/{sheetId}/col/{columnName}/row/{rowId}`
 
 **Request body:**
 
 ```json
 {
-  "row": 2,
-  "column": 3,
-  "value": "Utilities - Paid"
+    "content": "lookup(B,33)"
 }
 ```
 
 **Response:**
 
-```json
-{
-  "message": "Cell updated successfully"
-}
-```
+200 OK
 ## Test coverage
 
 - the project is covered by:
