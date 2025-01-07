@@ -50,7 +50,7 @@ class SheetControllerIntegrationTest<x> {
         setCellByApi(sheetId, "B", 11, SheetControllerITUtils.getCellRequestBodyWithLookup(44));
         // api call for tested route
         String sheetBody = getSheetByApi(sheetId);
-        Assert.assertEquals("{\"key\":\"sheet id:  1\",\"value\":[{\"rowNumber\":11,\"content\":44,\"colName\":\"B\"},{\"rowNumber\":12,\"content\":44,\"colName\":\"B\"}]}", sheetBody);
+        Assert.assertEquals("{\"key\":\"sheet id:  "+sheetId+"\",\"value\":[{\"rowNumber\":11,\"content\":44,\"colName\":\"B\"},{\"rowNumber\":12,\"content\":44,\"colName\":\"B\"}]}", sheetBody);
     }
 
     private String createSheetByApi() throws Exception {
