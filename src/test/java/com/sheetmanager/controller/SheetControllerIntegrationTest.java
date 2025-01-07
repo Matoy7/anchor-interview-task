@@ -15,85 +15,70 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @SpringBootTest
 @AutoConfigureMockMvc
 class SheetControllerIntegrationTest<x> {
-    String createSheetBody = "{\n" +
-            "    \"columns\": [\n" +
-            "        {\n" +
-            "            \"name\": \"A\",\n" +
-            "            \"type\": \"boolean\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"name\": \"B\",\n" +
-            "            \"type\": \"int\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"name\": \"C\",\n" +
-            "            \"type\": \"double\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"name\": \"D\",\n" +
-            "            \"type\": \"string\"\n" +
-            "        }\n" +
-            "    ]\n" +
-            "}";
-
-    String setCellBody = "{\n" +
-            "    \"content\": 33\n" +
-            "}";
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void testCreateSheetRoute() throws Exception {
-
-        MvcResult resultForCreateSheet = this.mockMvc.perform(MockMvcRequestBuilders.
-                post("/sheet/").
-                contentType(MediaType.APPLICATION_JSON).
-                content(createSheetBody)).
-                andExpect(MockMvcResultMatchers.status().isCreated()).andReturn();
-
-        String createSheetBodyString = resultForCreateSheet.getResponse().getContentAsString();
-        JSONObject createSheetBody = new JSONObject(createSheetBodyString);
-        String sheetId = createSheetBody.get("value").toString();
-        Assert.assertEquals("{\"key\":\"id\",\"value\":"+sheetId+"}", createSheetBodyString);
+        createSheetByApi();
     }
-
+    
     @Test
     void testGetSheetRoute() throws Exception {
-        MvcResult resultForCreateSheet =  this.mockMvc.perform(MockMvcRequestBuilders.
-                post("/sheet/").
-                contentType(MediaType.APPLICATION_JSON).content(createSheetBody)).
-                andExpect(MockMvcResultMatchers.status().isCreated()).andReturn();
-        String createSheetBodyString = resultForCreateSheet.getResponse().getContentAsString();
-        JSONObject createSheetBody = new JSONObject(createSheetBodyString);
-        String sheetId = createSheetBody.get("value").toString();
-        MvcResult getSheetResult = this.mockMvc.perform(MockMvcRequestBuilders.
-                get("/sheet/"+sheetId)).
-                andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
-
-        String getSheetBodyString = getSheetResult.getResponse().getContentAsString();
-        Assert.assertEquals("{\"key\":\"sheet id:  "+sheetId+"\",\"value\":[]}", getSheetBodyString);
+        // preparation
+        String sheetId = createSheetByApi();
+        // api call for tested route
+        String sheetBody = getSheetByApi(sheetId);
+        Assert.assertEquals("{\"key\":\"sheet id:  " + sheetId + "\",\"value\":[]}", sheetBody);
     }
 
     @Test
-    void testSetCellRoute() throws Exception {
-        MvcResult resultForCreateSheet =  this.mockMvc.perform(MockMvcRequestBuilders.
+    void testSetCellRoutePlainCellContent() throws Exception {
+        // preparation
+        String sheetId = createSheetByApi();
+        setCellByApi(sheetId, "B", 12, SheetControllerITUtils.getCellRequestBodyWithLookup(33));
+        // api call for tested route
+        String sheetBody = getSheetByApi(sheetId);
+        Assert.assertEquals("{\"key\":\"sheet id:  " + sheetId + "\",\"value\":[{\"rowNumber\":12,\"content\":33,\"colName\":\"B\"}]}", sheetBody);
+    }
+
+    @Test
+    void testSetCellRouteLookupCellContent() throws Exception {
+        // preparation
+        String sheetId = createSheetByApi();
+        setCellByApi(sheetId, "B", 12, SheetControllerITUtils.getCellRequestBodyWithLookup("B", 11));
+        setCellByApi(sheetId, "B", 11, SheetControllerITUtils.getCellRequestBodyWithLookup(44));
+        // api call for tested route
+        String sheetBody = getSheetByApi(sheetId);
+        Assert.assertEquals("{\"key\":\"sheet id:  1\",\"value\":[{\"rowNumber\":11,\"content\":44,\"colName\":\"B\"},{\"rowNumber\":12,\"content\":44,\"colName\":\"B\"}]}", sheetBody);
+    }
+
+    private String createSheetByApi() throws Exception {
+        MvcResult createSheetResult = this.mockMvc.perform(MockMvcRequestBuilders.
                 post("/sheet/").
-                contentType(MediaType.APPLICATION_JSON).content(createSheetBody)).
+                contentType(MediaType.APPLICATION_JSON).
+                content(SheetControllerITUtils.getSheetBody())).
                 andExpect(MockMvcResultMatchers.status().isCreated()).andReturn();
-        String createSheetBodyString = resultForCreateSheet.getResponse().getContentAsString();
+        String createSheetBodyString = createSheetResult.getResponse().getContentAsString();
         JSONObject createSheetBody = new JSONObject(createSheetBodyString);
         String sheetId = createSheetBody.get("value").toString();
+        // verification
+        Assert.assertEquals("{\"key\":\"id\",\"value\":" + sheetId + "}", createSheetBodyString);
+        return sheetId;
+    }
 
+    private void setCellByApi(String sheetId, Object colName, int rowNumber, String content) throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.
-                post("/sheet/"+sheetId+"/col/B/row/12").
-                contentType(MediaType.APPLICATION_JSON).content(setCellBody)).
+                post("/sheet/" + sheetId + "/col/" + colName + "/row/" + rowNumber).
+                contentType(MediaType.APPLICATION_JSON).content(content)).
                 andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+    }
 
-        MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.
-                get("/sheet/"+sheetId)).
+    private String getSheetByApi(String sheetId) throws Exception {
+        MvcResult getSheetResult = this.mockMvc.perform(MockMvcRequestBuilders.
+                get("/sheet/" + sheetId)).
                 andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
-
-        String content = mvcResult.getResponse().getContentAsString();
-        Assert.assertEquals("{\"key\":\"sheet id:  "+sheetId+"\",\"value\":[{\"rowNumber\":12,\"content\":33,\"colName\":\"B\"}]}", content);
+        // verification
+        return getSheetResult.getResponse().getContentAsString();
     }
 }
