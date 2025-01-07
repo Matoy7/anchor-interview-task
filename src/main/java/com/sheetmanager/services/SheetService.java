@@ -67,7 +67,7 @@ public class SheetService {
     public List<CellDTO> getCellsDTOListBySheetId(int sheetId) {
         List<Cell> cells = new ArrayList<>();
         if (sheetsBySheetId.get(sheetId) == null) {
-            String errorMsg = "The sheet with id: " + sheetId + " does exist";
+            String errorMsg = "The sheet with id: " + sheetId + " does not exist";
             log.error(errorMsg);
             throw new IllegalArgumentException(errorMsg);
         }
@@ -87,8 +87,11 @@ public class SheetService {
         if (!SheetUtils.isLookupExpression(content)) {
             return content;
         }
-        Cell cellFromReference = getCellFromReference(sheetId, content);
-        return getCellActualContent(sheetId, cellFromReference.getContent());
+        Cell refCell = getCellFromReference(sheetId, content);
+        if (refCell == null){
+            return null;
+        }
+        return getCellActualContent(sheetId, refCell.getContent());
     }
 
     private void validateCell(int sheetId, Schema schema, Cell cell) {
@@ -110,6 +113,9 @@ public class SheetService {
             throw new IllegalArgumentException(errorMsg);
         }
         Cell refCell = getCellFromReference(sheetId, content);
+        if (refCell == null){
+            return;
+        }
         ColumnType columnTypeFromRef = schema.getColumnMetadata().get(refCell.getColName());
         if (columnTypeFromRef == null) {
             String errorMsg = "No such column in schema as: " + refCell.getColName();
@@ -150,6 +156,9 @@ public class SheetService {
             return false;
         }
         Cell refCell = getCellFromReference(sheetId, cell.getContent());
+        if (refCell == null){
+             return false;
+        }
         return isCircleRefExist(sheetId, refCell, visitedCells);
     }
 
