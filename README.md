@@ -136,7 +136,7 @@ The application will start on `http://localhost:8080` by default.
 200 OK
 ### 4. Add Cell to spreadsheet with lookup value
 
-**Endpoint:** `PUT /api/spreadsheets/{id}/cells`
+**Endpoint:** `POST http://localhost:8080/sheet/{sheetId}/col/{columnName}/row/{rowId}`
 
 **Request body:**
 
