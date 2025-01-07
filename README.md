@@ -119,7 +119,7 @@ The application will start on `http://localhost:8080` by default.
 }
 ```
 
-### 3. Add Cell to spreadsheet
+### 3. Add Cell to spreadsheet with plain value
 
 **Endpoint:** `POST http://localhost:8080/sheet/{sheetId}/col/{columnName}/row/{rowId}`
 
@@ -131,7 +131,10 @@ The application will start on `http://localhost:8080` by default.
 }
 ```
 
-### 4. Update cell in spreadsheet
+**Response:**
+
+200 OK
+### 4. Add Cell to spreadsheet with lookup value
 
 **Endpoint:** `PUT /api/spreadsheets/{id}/cells`
 
@@ -139,19 +142,13 @@ The application will start on `http://localhost:8080` by default.
 
 ```json
 {
-  "row": 2,
-  "column": 3,
-  "value": "Utilities - Paid"
+    "content": "lookup(B,33)"
 }
 ```
 
 **Response:**
 
-```json
-{
-  "message": "Cell updated successfully"
-}
-```
+200 OK
 ## Test coverage
 
 - the project is covered by:
