@@ -53,12 +53,12 @@ To run the Spring Boot application, use the following command:
 ```bash
 mvn spring-boot:run
 ```
-```
 via cmd go to the compiled traget folder (where the jar is) and run:
-java -jar anchor-interview-task-1.0-SNAPSHOT.jar
 
-Or, if you prefer to run it via some IDE (Intellij or other)
 ```
+java -jar anchor-interview-task-1.0-SNAPSHOT.jar
+```
+Or, if you prefer to run it via some IDE (Intellij or other)
 
 The application will start on `http://localhost:8080` by default.
 
