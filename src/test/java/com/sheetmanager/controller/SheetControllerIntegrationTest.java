@@ -22,7 +22,7 @@ class SheetControllerIntegrationTest<x> {
     void testCreateSheetRoute() throws Exception {
         createSheetByApi();
     }
-    
+
     @Test
     void testGetSheetRoute() throws Exception {
         // preparation

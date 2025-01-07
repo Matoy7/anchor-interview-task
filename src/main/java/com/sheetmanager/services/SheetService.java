@@ -64,7 +64,7 @@ public class SheetService {
         rows.put(cellRowNumber, cell);
     }
 
-    public List<CellDTO> getCellsBySheetId(int sheetId) {
+    public List<CellDTO> getCellsDTOListBySheetId(int sheetId) {
         List<Cell> cells = new ArrayList<>();
         if (sheetsBySheetId.get(sheetId) == null) {
             String errorMsg = "The sheet with id: " + sheetId + " does exist";

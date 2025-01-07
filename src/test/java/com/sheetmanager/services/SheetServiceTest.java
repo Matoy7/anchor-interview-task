@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
@@ -134,7 +133,7 @@ public class SheetServiceTest {
         sheetService.setCell(sheetId, STRING_CELL_1, 1, new Cell(0, null, 0, "first"));
         sheetService.setCell(sheetId, STRING_CELL_2, 1, new Cell(0, null, 0, "second"));
         sheetService.setCell(sheetId, STRING_CELL_3, 1, new Cell(0, null, 0, "third"));
-        List<CellDTO> cells = sheetService.getCellsBySheetId(sheetId);
+        List<CellDTO> cells = sheetService.getCellsDTOListBySheetId(sheetId);
         Assert.assertEquals(3, cells.size());
 
         CellDTO firstCell = cells.get(0);
@@ -154,7 +153,7 @@ public class SheetServiceTest {
         sheetService.setCell(sheetId, STRING_CELL_1, 1, new Cell(0, null, 0, "lookup(B,1)"));
         sheetService.setCell(sheetId, STRING_CELL_2, 1, new Cell(0, null, 0, "lookup(D,1)"));
         sheetService.setCell(sheetId, STRING_CELL_3, 1, new Cell(0, null, 0, "third"));
-        List<CellDTO> cells = sheetService.getCellsBySheetId(sheetId);
+        List<CellDTO> cells = sheetService.getCellsDTOListBySheetId(sheetId);
         Assert.assertEquals(3, cells.size());
 
         CellDTO firstCell = cells.get(0);
@@ -175,7 +174,7 @@ public class SheetServiceTest {
         sheetService.setCell(sheetId, STRING_CELL_1, 1, new Cell(0, null, 0, "lookup(B,1)"));
         sheetService.setCell(sheetId, STRING_CELL_2, 1, new Cell(0, null, 0, "lookup(D,1)"));
         sheetService.setCell(sheetId, STRING_CELL_3, 1, new Cell(0, null, 0, "fourth"));
-        List<CellDTO> cells = sheetService.getCellsBySheetId(sheetId);
+        List<CellDTO> cells = sheetService.getCellsDTOListBySheetId(sheetId);
         Assert.assertEquals(3, cells.size());
 
         CellDTO firstCell = cells.get(0);

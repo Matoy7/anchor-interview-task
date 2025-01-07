@@ -60,7 +60,7 @@ public class SheetController {
     public ResponseEntity<BaseResponse> getSheetById(@PathVariable(value = "sheetId") int sheetId) {
         try {
             log.info("Request to get all cells from this sheetId: " + sheetId + " had received");
-            List<CellDTO> cellDTOList = this.sheetService.getCellsBySheetId(sheetId);
+            List<CellDTO> cellDTOList = this.sheetService.getCellsDTOListBySheetId(sheetId);
             return new ResponseEntity(new BaseResponse("sheet id:  " + sheetId, cellDTOList), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
