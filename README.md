@@ -58,7 +58,7 @@ via cmd go to the compiled traget folder (where the jar is) and run:
 ```
 java -jar anchor-interview-task-1.0-SNAPSHOT.jar
 ```
-Or, if you prefer to run it via some IDE (Intellij or other)
+Or, if you prefer to run it via some IDE (i.e. with Intellij)
 
 The application will start on `http://localhost:8080` by default.
 
