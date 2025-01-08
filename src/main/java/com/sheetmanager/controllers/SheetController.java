@@ -36,7 +36,7 @@ public class SheetController {
     public ResponseEntity<BaseResponse> createNewSheet(@RequestBody ColumnMetadataDTO columnMetadataDTO) {
         log.info("Request to create new sheet request had received");
         if (columnMetadataDTO == null) {
-            return new ResponseEntity("please enter valid schema dto in request body", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("please enter valid schema dto in request body", new HttpHeaders(), HttpStatus.BAD_REQUEST);
         }
         Schema schema = this.schemaMapper.toEntity(columnMetadataDTO);
         int newSheetId = this.sheetService.createNewSheet(schema);
