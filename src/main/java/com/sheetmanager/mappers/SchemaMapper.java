@@ -5,7 +5,6 @@ import com.sheetmanager.dtos.schema.ColumnsMetadataDTO;
 import com.sheetmanager.entities.schema.ColumnType;
 import com.sheetmanager.entities.schema.Schema;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Data
 public class SchemaMapper {
 
-    @Autowired
-    public SchemaMapper() {
-    }
 
     public Schema toEntity(ColumnMetadataDTO columnMetadataDTO) {
         Map<String, ColumnType> columnMetadata = new ConcurrentHashMap<>();
